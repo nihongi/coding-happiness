@@ -6,12 +6,7 @@ done
 
 for i in `seq 5 5 100`
 do
-  a[${i}]="Buzz"
-done
-
-for i in `seq 15 15 100`
-do
-  a[${i}]="FizzBuzz"
+  a[${i}]=${a[${i}]}"Buzz"
 done
 
 for i in {1..100}
