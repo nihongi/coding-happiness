@@ -60,7 +60,7 @@ Length: 15
 タブも空白も0に変換されるところはreadと同じです。改行も0に変換されます。catはreadと違って先頭の空白も0に変換されます。
 
 ## 読み込んだ文字列を配列に入れる
-上記の方法で読み込んだ文字列は`array=($s)`で配列に入れることができます。
+上記の方法で読み込んだ文字列は`array=(${s})`で配列に入れることができます。
 ```console:console
 $ cat file.txt | sh cat2array.sh
 Recieved:  A B  C  D
