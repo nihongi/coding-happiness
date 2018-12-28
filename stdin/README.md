@@ -8,13 +8,13 @@ readは一行ずつ標準入力を読み込みます。試しに次のファイ�
  E
 F
 ```
-空白やタブをこのように入れています。
+このファイルには空白やタブを下記のように入れています。
 ```
 <空白>A<空白>B<タブ>C<空白2個>D<改行><空白>E<空白><改行>F
 ```
 ```console:console
 $ cat file.txt | sh stdin_read.sh
-Recieved: A B C D
+Recieved: A B   C  D
 Length: 8
 65
 0
@@ -37,7 +37,9 @@ Length: 1
 同じファイルをcatで読み込んで、結果をアスキーコードで出力してみます。
 ```console:console
 $ cat file.txt | sh stdin_cat.sh
-Recieved:  A B C D E F
+Recieved:  A B  C  D
+ E
+F
 Length: 15
 0
 65
@@ -61,7 +63,9 @@ Length: 15
 上記の方法で読み込んだ文字列は`array=($s)`で配列に入れることができます。
 ```console:console
 $ cat file.txt | sh cat2array.sh
-Recieved:  A B C D E F
+Recieved:  A B  C  D
+ E
+F
 Length: 15
 array[0] = A
 array[1] = B
@@ -69,7 +73,6 @@ array[2] = C
 array[3] = D
 array[4] = E
 array[5] = F
-
 ```
 こうすると、先頭の空白も、空白が2個連続するところも無視されて、文字だけが配列に入ります。
 
@@ -80,9 +83,9 @@ readは引数を複数にすると、カラムに分けて先頭の引数から�
 exec {FD}</etc/hosts
 while read -u ${FD} ip host aliases
 do
-  echo "IP address = "$ip
-  echo "Hostname = "$host
-  echo "Alias(es) = "$aliases
+  echo "IP address = ${ip}"
+  echo "Hostname = ${host}"
+  echo "Alias(es) = ${aliases}"
 done
 ```
 ```console:console
