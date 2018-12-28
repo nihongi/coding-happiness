@@ -7,5 +7,5 @@ fact() {
   fi
 }
 
-fact $1
+fact ${1}
 echo
