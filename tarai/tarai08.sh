@@ -41,7 +41,7 @@ do
       stack[i+4]="$(( ${job[2]} - 1 )) ${job[0]} ${job[1]} r $(( ${i} + 1 )) z"
     fi
   else
-    if [ ${job[4]} -eq -1 ]; then
+    if [ ${i} -eq 0 ]; then
       echo ${job[3]}
       break
     else
