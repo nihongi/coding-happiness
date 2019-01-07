@@ -16,7 +16,7 @@ put() {
     wait ${children}
     for i in ${children}
     do
-      if [ -e /tmp/nq.${i} ]; then
+      if [ -f /tmp/nq.${i} ]; then
         cat /tmp/nq.${i}
         rm /tmp/nq.${i}
       fi
@@ -26,7 +26,6 @@ put() {
     # もしi行目にクイーンを置いたら(${2}-1)列目までに衝突があるかを調べる
     # 衝突がなければクイーンを置いて次の列に行く
     children=""
-    tmpfiles=""
     for i in {0..7}
     do
       for j in `seq 0 $(( ${2} - 1 ))`  # j列目
@@ -51,20 +50,17 @@ put() {
       # 衝突なし
       tmp=${1:0:$(( ${2} + 8 * ${i} ))}"1"${1:$(( ${2} + 8 * ${i} + 1 ))}
       if [ ${2} = 7 ]; then
-        echo ${tmp} >> /tmp/nq.${BASHPID}
-        echo "debug2 ${BASHPID}" >&2
+        echo ${tmp} >> /tmp/nq.$BASHPID
       else
         (put ${tmp} $(( ${2} + 1 )))&
         children="${children} $!"
       fi
     done
     wait ${children}
-    echo "debug1 t=${tmpfiles} c=${children} pid=${BASHPID}" >&2
     for i in ${children}
     do
-      if [ -e /tmp/nq.${i} ]; then
-        cat /tmp/nq.${i} >> /tmp/nq.${BASHPID}
-        echo "debug3 ${BASHPID}" >&2
+      if [ -f /tmp/nq.${i} ]; then
+        cat /tmp/nq.${i}
         rm /tmp/nq.${i}
       fi
     done
