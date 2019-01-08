@@ -51,20 +51,21 @@ put() {
       # 衝突なし
       tmp=${1:0:$(( ${2} + 8 * ${i} ))}"1"${1:$(( ${2} + 8 * ${i} + 1 ))}
       if [ ${2} = 7 ]; then
-        echo ${tmp} >> /tmp/nq.${BASHPID}
-        echo "debug2 ${BASHPID}" >&2
+        pid=${BASHPID}
+        echo ${tmp} >> /tmp/nq.${pid}
+        echo "debug2 ${pid}" >&2
       else
         (put ${tmp} $(( ${2} + 1 )))&
         children="${children} $!"
       fi
     done
     wait ${children}
-    echo "debug1 t=${tmpfiles} c=${children} pid=${BASHPID}" >&2
+    pid=${BASHPID}
     for i in ${children}
     do
       if [ -e /tmp/nq.${i} ]; then
-        cat /tmp/nq.${i} >> /tmp/nq.${BASHPID}
-        echo "debug3 ${BASHPID}" >&2
+        cat /tmp/nq.${i} >> /tmp/nq.${pid}
+        echo "debug3 ${pid}" >&2
         rm /tmp/nq.${i}
       fi
     done
