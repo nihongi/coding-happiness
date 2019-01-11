@@ -39,8 +39,8 @@ mc_close() {
   echo "quit" >&"${mc[1]}"
 }
 
-#mc_open
-#mc_set key 10 value
-#mc_get key
-#mc_close
+mc_open
+mc_set key 10 value
+mc_get key
+mc_close
 
