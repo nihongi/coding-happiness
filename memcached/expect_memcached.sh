@@ -9,11 +9,16 @@ expect \"STORED\"
 send \"quit\r\"
 "
 
-expect -c "
+result=($(expect -c "
 set timeout 20
 spawn telnet localhost 11211
 expect \"'^]'.\"
 send \"get mykey\r\"
 expect \"END\"
 send \"quit\r\"
-"
+"))
+
+for i in `seq 0 ${#result[@]}`
+do
+  echo ${result[${i}]}
+done
