@@ -1,6 +1,7 @@
 #!/bin/bash
 
 put() {
+  local i j board
   # ${1}の${2}列目にクイーンを置く
   # 0列目は無条件に置ける
   if [[ ${2} -eq 0 ]]; then
@@ -15,7 +16,7 @@ put() {
     board=(${1})
     for i in {0..7}
     do
-      for j in `seq 0 $(( ${2} - 1 ))`  # j列目
+      for j in $(seq 0 $(( ${2} - 1 )))
       do
         if [[ ${board[j]} -eq ${i} ||\
               ${board[j]} -eq $(( ${i} + ${2} - ${j} )) ||\
