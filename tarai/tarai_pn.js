@@ -16,17 +16,13 @@ var result;  // 計算する部分の計算結果、未定の場合は-10000
   p = 0;
 //  result = -10000;
   set_range:
-  while(true) {  // 計算可能な式の開始位置と終了位置を決める
-    if('t' == formula[p]) {
-      if(isNaN(formula[p + 1])) {
+  while (true) {  // 計算可能な式の開始位置と終了位置を決める
+    if ('t' == formula[p]) {
+      if (isNaN(formula[p + 1])) {
         p += 1;
-//        continue;
-      }
-      else if(isNaN(formula[p + 2])) {
+      } else if(isNaN(formula[p + 2])) {
         p += 2;
-//        continue;
-      }
-      else {  // 「t, <数値>, <数値>, <式 or 数値>」を見つけた
+      } else {  // 「t, <数値>, <数値>, <式 or 数値>」を見つけた
         if(formula[p + 1] <= formula[p + 2]) {
           // x <= y の場合
           result = formula[p + 2];
@@ -34,36 +30,31 @@ var result;  // 計算する部分の計算結果、未定の場合は-10000
         start = p;
         end = p + 3;
         p = end;
-        while(true) {  // 式の終了位置を探す
-          if(! isNaN(formula[p])) {
+        while (true) {  // 式の終了位置を探す
+          if (! isNaN(formula[p])) {
             if(p == end) {
               break set_range;
             }
-          }
-          else {
-            if('t' == formula[p]) {
+          } else {
+            if ('t' == formula[p]) {
               end += 3;
-            }
-            else { // 's' == formula[p]
+            } else { // 's' == formula[p]
               end += 1;
             }
           }
           p += 1;
         }
       }
-    }
-    else if('s' == formula[p]) {
-      if(isNaN(formula[p + 1])) {
+    } else if ('s' == formula[p]) {
+      if (isNaN(formula[p + 1])) {
         p += 1;
-      }
-      else {  // 「s, <数値>」を見つけた
+      } else {  // 「s, <数値>」を見つけた
         start = p;
         end = p + 1;
         result = formula[p + 1] - 1;
         break;
       }
-    }
-    else {
+    } else {
       p += 1;
     }
   }
