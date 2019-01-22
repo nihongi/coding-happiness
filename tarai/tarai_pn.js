@@ -1,20 +1,20 @@
 // var formula = ['t', process.argv[2], process.argv[3], process.argv[4]];
 // var formula=process.argv[2];
 
-var formula = ['t','t', '1', '1', '0', 't', '0', '0', '2', 't', '-1', '2', '1'];
-//var formula = ['t', '1', '1', '0'];
+//var formula = ['t','t', '1', '1', '0', 't', '0', '0', '2', 't', '-1', '2', '1'];
+var formula = ['t', '1', '1', '0'];
+//var formula = ['t', '2', '1', '0'];
 console.error(formula);
 
 var p;       // ポインタ
 var start;   // 計算する部分の開始位置
 var end;     // 計算する部分の終了位置
-//var tmp_end; // 計算する部分の仮の終了位置
-var result;  // 計算する部分の計算結果、未定の場合は-10000
+var result;  // 計算する部分の計算結果、未定の場合はnull
 
 //while(true) {  // 式の変形結果が数値になるまで繰り返す
 //  if(! isNaN(formula[0])) break;
   p = 0;
-//  result = -10000;
+  result = null;
   set_range:
   while (true) {  // 計算可能な式の開始位置と終了位置を決める
     if ('t' == formula[p]) {
@@ -59,7 +59,10 @@ var result;  // 計算する部分の計算結果、未定の場合は-10000
     }
   }
 
-console.error("start = %d, end = %d", start, end);
+if (result == null) {
+  result = -10000
+}
+console.error("start = %d, end = %d, result = %d", start, end, result);
   // 計算可能な式の開始位置と終了位置が決まった
 
   // resultが計算済みの場合 (式を縮める方向)
